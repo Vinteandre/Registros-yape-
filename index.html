@@ -3,662 +3,931 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>registros yape</title>
-<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>emailjs.init("POzJQNgFkNizml2_l")</script>
+<title>Pagos Yape</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-body{background:linear-gradient(135deg,#FFE8F5 0%,#E8F0FF 100%);color:#000;padding-bottom:20px;min-height:100vh;font-weight:700}
-.hidden{display:none!important}
-.login-container{ background: #f2f2f2; display: flex; justify-content: center; align-items: center; height: 100vh; }
-.login-card { background: white; padding: 30px; border-radius: 10px; width: 350px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-.login-card h2 { text-align: center; margin-bottom: 20px; font-weight:900 }
-.login-card input,.login-card button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 15px; cursor:pointer; font-weight:700 }
-.login-card button { background: #007bff; color: white; border: none; font-weight: 900; }
-.link-azul { text-align: center; margin-top: 15px; color: #007bff; cursor: pointer; font-weight: 900; }
-.volver { background: #ccc!important; color: #000!important; }
-.header{padding:14px 16px;display:flex;align-items:center;gap:12px}
-.menu-btn{background:transparent;border:none;font-size:24px;color:#000;cursor:pointer;font-weight:900}
-.logo-activos{background:#fff;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:900;display:flex;align-items:center;gap:6px}
-.punto-verde{width:8px;height:8px;background:#00C853;border-radius:50%}
-.banner{margin:16px;text-align:center}
-.banner h1{color:#000;font-size:32px;font-weight:900}
-.banner p{color:#333;font-size:14px;font-weight:700}
-.bottom-menu{margin:16px;background:#fff;display:flex;justify-content:space-around;padding:6px;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.menu-item{text-align:center;color:#888;cursor:pointer;font-size:15px;font-weight:900;flex:1;padding:10px 0;border-radius:12px}
-.menu-item.active{color:#000;background:#fff;position:relative}
-.menu-item.active::after{content:'';position:absolute;bottom:0;left:20%;width:60%;height:3px;background:#FF2D55;border-radius:2px}
-.search{margin:0 16px 12px}
-.search input{width:100%;padding:14px 14px 14px 40px;border-radius:14px;border:none;background:#fff;color:#000;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.05);font-weight:700}
-.botones-top{display:flex;gap:10px;margin:0 16px 15px}
-.btn-crear{flex:1;padding:14px;background:#fff;border:none;border-radius:14px;font-weight:900;color:#000;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.05);cursor:pointer}
-.btn-analisis{flex:1;padding:14px;background:#fff;border:none;border-radius:14px;font-weight:900;color:#000;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.05);cursor:pointer}
-.btn-total{flex:1.3;padding:14px;background:#fff;border:2px solid #fff;border-radius:14px;font-weight:900;color:#000;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer}
-.tabs{display:flex;gap:8px;margin:0 16px 20px;overflow-x:auto;padding-bottom:4px}
-.tab{padding:10px 18px;border-radius:14px;background:#fff;color:#666;font-size:14px;font-weight:900;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.tab.active{background:#000;color:#fff}
-  h3{margin:16px 16px 12px;font-size:17px;font-weight:900;color:#000}
-.page{display:none}
-.page.active{display:block}
-.populares{display:flex;flex-direction:column;gap:12px;padding:0 16px 20px}
-.card{border-radius:16px;display:flex;align-items:center;justify-content:space-between;padding:14px;cursor:pointer;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
-.card-left{display:flex;align-items:center;gap:12px}
-.card-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#FF2D55,#A855F7);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:900}
-.card-titulo{font-size:16px;color:#000;font-weight:900}
-.card-nombre{font-size:12px;color:#666;margin-top:2px;font-weight:700}
-.card-right{text-align:right}
-.card-monto{font-size:16px;font-weight:900;color:#00C853;transition:0.2s}
-.card-precio{font-size:11px;color:#888;margin-top:2px;font-weight:700}
-.pozo-container{background:#fff;min-height:100vh;padding-bottom:100px}
-.pozo-header{background:linear-gradient(135deg,#FFE8F5 0%,#E8F0FF 100%);padding:50px 16px 25px;text-align:center;position:relative}
-.btn-atras{position:absolute;top:15px;left:15px;background:transparent;border:none;color:#000;font-size:24px;cursor:pointer;font-weight:900}
-.pozo-label{font-size:16px;font-weight:900;color:#000}
-.pozo-seguro{display:flex;align-items:center;justify-content:center;gap:6px;color:#00C853;font-size:13px;font-weight:900;margin:4px 0 8px}
-.pozo-saldo-grande{font-size:48px;font-weight:900;color:#000;transition:0.2s}
-.total-fullscreen{background:linear-gradient(135deg,#FFE8F5 0%,#E8F0FF 100%);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.total-label{font-size:18px;font-weight:900;color:#000;margin-bottom:8px}
-.total-seguro{display:flex;align-items:center;justify-content:center;gap:6px;color:#00C853;font-size:14px;font-weight:900;margin-bottom:15px}
-.total-monto{font-size:72px;font-weight:900;color:#000}
-.botones-pozo{display:flex;gap:10px;margin:0 16px 20px}
-.btn-depositar{flex:1;padding:16px;background:#000;border:none;border-radius:14px;font-weight:900;color:#fff;cursor:pointer}
-.btn-depositar:disabled{background:#ccc;cursor:not-allowed}
-.btn-yape{flex:1;padding:16px;background:#7B2FFF;border:none;border-radius:14px;font-weight:900;color:#fff;cursor:pointer}
-.qr-box{display:none;margin:0 16px;background:#F8F5FF;border-radius:16px;padding:20px;text-align:center}
-.qr-monto{color:#7B2FFF;font-size:24px;font-weight:900;margin-bottom:12px}
-.qr-img{width:220px;height:220px;margin:0 auto 10px;border-radius:12px;background:#fff;padding:8px}
-.qr-text{color:#666;font-size:13px;margin-bottom:15px;font-weight:700}
-.btn-iryape{padding:14px 40px;background:#7B2FFF;border:none;border-radius:14px;color:#fff;font-weight:900;font-size:15px;cursor:pointer}
-.transacciones-box{margin:16px;background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-.depositante-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #F5F5F5}
-.depositante-item:last-child{border-bottom:none}
-.depositante-left{display:flex;align-items:center;gap:12px}
-.depositante-icon{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,#FF2D55,#A855F7);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
-.depositante-nombre{font-weight:900;font-size:15px;color:#000}
-.depositante-desc{font-size:12px;color:#888;font-weight:700}
-.depositante-monto{color:#00C853;font-weight:900;font-size:15px}
-  .page-header{display:flex;align-items:center;gap:15px;padding:16px;background:transparent}
-.page-header h3{margin:0;font-size:18px;font-weight:900}
-.btn-atras-nuevo{background:transparent;border:none;padding:0;cursor:pointer}
-.btn-atras-nuevo svg{width:28px;height:28px;stroke:#000;stroke-width:2.5}
-.registro-card{background:#fff;border-radius:16px;padding:14px;margin:0 16px 12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-.perfil-container{padding:20px;background:#fff;min-height:100vh}
-.perfil-header{text-align:center;font-size:22px;font-weight:900;margin:20px 0 30px}
-.perfil-item{padding:18px 5px;border-bottom:1px solid #EEE;display:flex;justify-content:space-between;align-items:center;font-size:15px;cursor:pointer;font-weight:700}
-.perfil-item:hover{background:#F9F9F9}
-.perfil-item label{color:#666;font-weight:700}
-.perfil-item span{font-weight:900;color:#000}
-.perfil-item svg{width:18px;height:18px;stroke:#999}
-.chat-box{margin:16px;background:#fff;border-radius:16px;padding:12px;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
-  .chat-input{display:flex;gap:8px}
-.chat-input input{flex:1;padding:12px;border:none;background:#F5F5F5;border-radius:12px;font-size:14px;font-weight:700}
-.btn-enviar{padding:12px 20px;background:#FF2D55;border:none;border-radius:12px;color:#fff;font-weight:900;cursor:pointer}
-.btn{width:100%;padding:14px;background:#000;border:none;border-radius:14px;font-weight:900;color:#fff;font-size:15px;margin-top:10px;cursor:pointer}
-.btn-subir{width:100%;padding:14px;background:#7B2FFF;border:none;border-radius:14px;font-weight:900;color:#fff;font-size:15px;margin-bottom:10px;cursor:pointer}
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:100;overflow-y:auto}
-.modal.active{display:block}
-.modal-box{background:#fff;padding:24px;border-radius:20px;width:90%;max-width:380px;margin:40px auto;position:relative}
- .modal-box input,.modal-box select{width:100%;padding:12px;margin-bottom:10px;background:#F5F5F5;border:none;border-radius:12px;color:#000;font-weight:700}
-.label-qr{font-size:12px;color:#666;text-align:left;margin-bottom:4px;font-weight:900}
-.preview-qr{width:100px;height:100px;border-radius:10px;object-fit:cover;margin:10px auto;display:none;border:2px solid #7B2FFF}
-.btn-eliminar{background:#FF3B30;border:none;border-radius:10px;padding:8px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.btn-eliminar svg{width:18px;height:18px;stroke:#fff}
-.side-menu{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;z-index:200;transition:0.3s;padding-top:20px;display:flex;flex-direction:column}
-.side-menu.active{left:0}
-.side-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:199}
-.side-overlay.active{display:block}
-  .side-item{padding:16px 20px;color:#333;cursor:pointer;font-size:15px;font-weight:900;border-bottom:1px solid #F5F5F5;display:flex;justify-content:space-between;align-items:center}
-.side-item:hover{background:#F5F5F5}
-.side-correo{padding:16px 20px;font-size:13px;color:#666;border-top:1px solid #eee;margin-top:auto;font-weight:700}
-#graficoAnalisis{width:100%;height:300px;background:#000;border-radius:12px;margin:15px 0}
-.stats-grid{display:flex;gap:10px;margin:15px 0}
-.stats-card{flex:1;background:#F5F5F5;border-radius:12px;padding:12px;text-align:center}
-.stats-num{font-size:20px;font-weight:900;color:#000}
-#notiDeposito{display:none;position:fixed;top:20px;right:20px;background:#00C853;color:#fff;padding:14px 18px;border-radius:12px;font-weight:900;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,0.2);animation:slideIn.3s}
-@keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
-.limite-dia{color:#FF3B30;font-size:12px;text-align:center;margin:10px 16px;font-weight:900}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+body { background: #fff; color: #000; }
+.app { max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh; position: relative; padding-bottom: 70px; }
+.hidden { display: none!important; }
+
+/* TOP BAR */
+.top-bar { display: flex; justify-content: space-between; gap: 15px; padding: 12px 20px; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 5; }
+.top-left { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; }
+.top-left svg { width: 18px; height: 18px; fill: #000; }
+.top-right { display: flex; gap: 15px; align-items: center; }
+.btn-outline { border: 1.5px solid #000; padding: 8px 20px; border-radius: 25px; background: #fff; font-weight: 600; font-size: 14px; cursor: pointer; }
+.btn-text { background: none; border: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+
+/* BARRA MENÚ INFERIOR */
+.navbar { 
+  display: flex; 
+  justify-content: space-around; 
+  align-items: center; 
+  padding: 10px 0; 
+  position: fixed; 
+  bottom: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; 
+  max-width: 500px; 
+  background: #fff; 
+  z-index: 5; 
+  border-top: 1px solid #eee; 
+}
+.nav-item { 
+  flex: 1; 
+  text-align: center; 
+  cursor: pointer; 
+  position: relative;
+}
+.nav-item svg { width: 24px; height: 24px; fill: #000; }
+.nav-item span { font-size: 12px; display: block; margin-top: 2px; font-weight: 500; }
+.nav-badge {
+  position: absolute;
+  top: -2px;
+  right: 28%;
+  width: 9px;
+  height: 9px;
+  background: #00C853;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+}
+
+/* BUSCADOR Y SALAS */
+.search-box { margin: 15px 20px; padding: 12px 15px; background: #f5f5f5; border-radius: 20px; display: flex; align-items: center; gap: 10px; }
+.search-box svg { width: 20px; height: 20px; fill: #888; }
+.search-box input { background: transparent; border: none; outline: none; width: 100%; font-size: 15px; }
+.card { margin: 15px 20px; padding: 15px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.card-left { display: flex; flex-direction: column; gap: 4px; }
+.card-left b { font-size: 16px; font-weight: 700; }
+.card-left small { font-size: 12px; color: #666; }
+.card-right { display: flex; align-items: center; gap: 12px; }
+.card-price { font-size: 18px; font-weight: 900; }
+.menu-btn { width: 32px; height: 32px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; }
+.participants { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #00C853; font-weight: 700; }
+.watermark { position: absolute; bottom: 80px; right: 15px; font-size: 11px; color: #ccc; font-weight: 600; }
+.header-back { display: flex; align-items: center; gap: 8px; padding: 15px 20px; font-weight: 500; cursor: pointer; }
+
+/* CREAR SALA */
+.create-container { padding: 20px; }
+.create-title { text-align: center; font-size: 28px; font-weight: 900; margin: 20px 0 40px; }
+.input-group { background: #f5f5f5; border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+.input-group svg { width: 18px; height: 18px; fill: #000; }
+.input-group input { background: transparent; border: none; outline: none; width: 100%; font-size: 15px; }
+.qr-btn { border: 2px dashed #ccc; padding: 8px 15px; border-radius: 8px; background: #fff; cursor: pointer; font-weight: 600; }
+.btn-row { display: flex; gap: 10px; margin-top: 30px; }
+.btn-black { background: #000; color: #fff; border: none; padding: 14px; border-radius: 25px; font-weight: 900; width: 55%; cursor: pointer; }
+.btn-black:disabled { background: #ccc; cursor: not-allowed; }
+.btn-gray { background: #f5f5f5; color: #000; border: none; padding: 14px; border-radius: 25px; font-weight: 700; width: 45%; cursor: pointer; }
+.error { color: #FF3B30; font-size: 13px; margin-top: -10px; margin-bottom: 10px; padding-left: 10px; }
+.alert { background:#FFF3CD; color:#856404; padding:12px; border-radius:8px; margin-bottom:15px; }
+.alert-danger { background:#F8D7DA; color:#721C24; padding:12px; border-radius:8px; margin-bottom:15px; }
+
+/* SALA DETALLES */
+.sala-header { text-align: center; padding: 10px 20px 0; }
+.sala-total { font-size: 36px; font-weight: 900; transition: all 0.3s; margin-bottom: 5px; }
+.sala-contador { font-size: 14px; color: #666; margin-bottom: 15px; }
+
+/* BOTONES UNIFICADOS (PRECIOS, PAGAR, VER QR) */
+.sala-top { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px 20px; flex-wrap: wrap; }
+
+.btn-pagar, .btn-qr-toggle, .monto-select { 
+  background: #000; 
+  color: #fff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 12px; 
+  cursor: pointer; 
+  font-weight: 800; 
+  font-size: 14px; 
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.btn-pagar:hover, .btn-qr-toggle:hover, .monto-select:hover { opacity: 0.88; }
+.btn-pagar:disabled { background: #ccc; color: #888; cursor: not-allowed; box-shadow: none; }
+
+.monto-select { position: relative; gap: 6px; user-select: none; }
+.arrow-icon { width: 14px; height: 14px; fill: #fff; transition: transform 0.2s; }
+.monto-select.open .arrow-icon { transform: rotate(180deg); }
+
+.monto-opciones { 
+  display: none; 
+  flex-direction: column; 
+  position: absolute; 
+  top: 115%; 
+  left: 0; 
+  background: #fff; 
+  border: 1.5px solid #000; 
+  border-radius: 12px; 
+  padding: 5px; 
+  z-index: 10; 
+  width: 100%; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  color: #000;
+}
+.monto-opciones.show { display: flex; }
+.monto-opt { 
+  cursor: pointer; 
+  padding: 8px 12px; 
+  text-align: center; 
+  border-radius: 8px; 
+  font-weight: 700; 
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s;
+}
+.monto-opt:hover { background: #f0f0f0; }
+.monto-opt.active { background: #000; color: #fff; }
+
+/* TABS Y TARJETAS DE PAGOS (TIPO NOTIFICACIÓN) */
+.tabs { display: flex; padding: 0 20px; border-bottom: 2px solid #eee; margin-top: 10px; margin-bottom: 15px; }
+.tab { flex: 1; text-align: center; padding: 12px; font-weight: 600; }
+.tab.active { border-bottom: 3px solid #00C853; }
+
+.user-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  animation: slideIn 0.3s ease-out;
+}
+.payment-user { font-weight: 700; font-size: 14px; color: #000; }
+.payment-amount { font-weight: 800; font-size: 15px; color: #00C853; }
+
+.qr-container { text-align: center; padding: 20px; display: none; }
+.qr-container img { width: 250px; height: 250px; border-radius: 12px; object-fit: contain; background: #fff; }
+
+/* CHAT DE SALA Y GLOBAL */
+.chat-section-title { padding: 15px 20px 0; font-size: 14px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+.chat-box { 
+  margin: 10px 20px 10px; 
+  border: 1px solid #e0e0e0; 
+  padding: 15px; 
+  border-radius: 16px; 
+  height: 280px; 
+  overflow-y: auto; 
+  background: #fafafa; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-bubble-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  animation: slideIn 0.2s ease-out;
+}
+.chat-bubble-row.mine { align-self: flex-end; align-items: flex-end; }
+.chat-bubble-row.other { align-self: flex-start; align-items: flex-start; }
+.chat-bubble-row.system { align-self: flex-start; align-items: flex-start; max-width: 85%; }
+.chat-sender-name { font-size: 11px; font-weight: 700; color: #00C853; margin-bottom: 3px; margin-left: 4px; }
+.chat-bubble { padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.4; word-break: break-word; position: relative; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.chat-bubble-row.mine .chat-bubble { background: #000; color: #fff; border-bottom-right-radius: 2px; }
+.chat-bubble-row.other .chat-bubble { background: #f0f0f0; color: #111; border: 1px solid #e0e0e0; border-bottom-left-radius: 2px; }
+.chat-bubble-row.system .chat-bubble { background: #e8f5e9; color: #1b5e20; border: 1px solid #c8e6c9; font-size: 13px; font-weight: 600; text-align: left; border-radius: 12px; padding: 8px 12px; }
+.chat-time { font-size: 10px; margin-top: 4px; opacity: 0.65; display: block; }
+.chat-bubble-row.mine .chat-time { text-align: right; color: #ccc; }
+.chat-bubble-row.other .chat-time { text-align: right; color: #888; }
+.chat-bubble-row.system .chat-time { text-align: right; color: #2e7d32; }
+
+/* BARRA DE ENTRADA FIJA DEBAJO DEL CHAT */
+.chat-input { 
+  display: flex; 
+  padding: 5px 20px 20px; 
+  gap: 10px; 
+  align-items: center; 
+  background: #fff; 
+}
+.chat-input input { flex: 1; background: #f5f5f5; border: 1px solid #eee; padding: 12px 18px; border-radius: 25px; outline: none; font-size: 14px; transition: border 0.2s; }
+.chat-input input:focus { border-color: #000; background: #fff; }
+.send-btn { background: #000; color: #fff; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; transition: transform 0.1s; }
+.send-btn:active { transform: scale(0.92); }
+
+/* NOTIFICACIONES */
+.notif-container { padding: 15px 20px; display: flex; flex-direction: column; gap: 12px; }
+.notif-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  animation: slideIn 0.3s ease-out;
+}
+.notif-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.notif-icon-box.payment { background: #e8f5e9; fill: #00C853; }
+.notif-icon-box.room { background: #e3f2fd; fill: #1e88e5; }
+.notif-icon-box.system { background: #fff3e0; fill: #fb8c00; }
+.notif-icon-box svg { width: 20px; height: 20px; }
+
+.notif-content { flex: 1; }
+.notif-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.notif-title { font-weight: 700; font-size: 14px; color: #000; }
+.notif-time { font-size: 11px; color: #999; font-weight: 500; }
+.notif-body { font-size: 13px; color: #555; line-height: 1.3; }
+
+@keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
-  <div id="pantallaLogin" class="login-container">
-  <div class="login-card" id="formLogin">
-    <h2>Iniciar Sesión</h2>
-    <input type="email" id="loginEmail" placeholder="Ingresa tu Gmail">
-    <input type="password" id="loginPassword" placeholder="Ingresa tu Contraseña">
-    <button id="btnIngresar">INGRESAR</button>
-    <div class="link-azul" id="btnMostrarRegistro">Crear cuenta</div>
-  </div>
-  <div class="login-card hidden" id="formRegistro">
-    <h2>Crear Cuenta</h2>
-    <input type="email" id="email" placeholder="Ingresa tu Gmail">
-    <input type="password" id="password" placeholder="Crea tu Contraseña">
-    <button id="btnEnviarCodigo">ENVIAR CÓDIGO</button>
-    <button class="volver" id="btnVolverLogin">← Volver</button>
-  </div>
-  <div class="login-card hidden" id="formVerificar">
-    <h2>Ingresa el Código</h2>
-    <input type="text" id="otpInput" placeholder="Código de 6 dígitos" maxlength="6">
-    <button id="btnVerificar">VERIFICAR</button>
-  </div>
-</div>
+<div class="app">
 
-<div id="pantallaApp" class="hidden">
-<div class="side-overlay" id="sideOverlay"></div>
-<div class="side-menu" id="sideMenu">
-  <div style="text-align:right;padding:0 16px"><button id="btnCerrarMenu" style="background:transparent;border:none;font-size:26px;font-weight:900">×</button></div>
-  <div class="side-item">Editar Perfil</div>
-  <div class="side-item" id="btnAbrirNoti">Notificaciones <svg width="20" height="20" fill="none" stroke="#333" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
-  <div class="side-item">Idioma</div>
-  <div class="side-item">Ajustes</div>
-  <div class="side-item">Centro de Ayuda</div>
-  <div class="side-item" id="btnCerrarSesion">Cerrar Sesión</div>
-  <div class="side-correo">
-    <div>Sesión:</div>
-    <div id="correoMenu" style="font-weight:900;color:#000"></div>
-  </div>
-</div>
-  <div id="modal" class="modal"><div class="modal-box">
-<button class="btn-atras" id="btnCerrarModal">←</button>
-<h3 style="text-align:center;margin-bottom:20px;font-weight:900">Registrar Nuevo Registro</h3>
-<input type="text" id="nombreJuego" placeholder="Nombre del Registro">
-<input type="text" id="usuarioJuego" placeholder="Nombre de usuario">
-<input type="email" id="correoJuego" placeholder="Correo electrónico">
-<select id="selectDeposito">
-<option value="1">S/. 1</option><option value="2">S/. 2</option><option value="3">S/. 3</option>
-<option value="4">S/. 4</option><option value="5">S/. 5</option><option value="10">S/. 10</option>
-</select>
-<div class="label-qr">Sube tu QR de Yape desde tu galería</div>
-<button class="btn-subir" id="btnSubirQR">📷 Subir QR</button>
-<input type="file" id="fileQR" accept="image/*" style="display:none">
-<img id="previewQR" class="preview-qr" src="">
-<button class="btn" id="btnCrearJuego">Crear Registro</button>
-</div></div>
-
-<div id="totalFullscreen" class="modal">
-<div class="total-fullscreen">
-<button class="btn-atras" id="btnCerrarTotal" style="position:absolute;top:15px;left:15px">←</button>
-<div class="total-label">Total Acumulado</div>
-<div class="total-seguro">✓ Seguro</div>
-<div class="total-monto" id="totalAcumuladoNum">S/0.00</div>
-</div>
-</div>
-
-<div id="analisisModal" class="modal"><div class="modal-box" style="max-width:95%">
-<button class="btn-atras" id="btnCerrarAnalisis">←</button>
-<h3 style="text-align:center;font-weight:900">📊 Análisis del Mercado</h3>
-<div class="stats-grid">
-<div class="stats-card"><div class="stats-num" id="analisisTotalPozos">0</div><div>Total Registros</div></div>
-<div class="stats-card"><div class="stats-num">S/.<span id="analisisTotalAcumulado">0.00</span></div><div>Acumulado</div></div>
-</div>
-<div id="graficoAnalisis"></div>
-<p style="text-align:center;color:#666;font-size:12px;font-weight:700">Gráfico en tiempo real del REGISTRO</p>
-</div></div>
-
-<div id="pozoModal" class="modal">
-<div class="pozo-container">
-<div class="pozo-header">
-<button class="btn-atras" id="btnCerrarPozo">←</button>
-<div class="pozo-label">Mi saldo</div>
-<div class="pozo-seguro">✓ Seguro</div>
-<div class="pozo-saldo-grande">S/<span id="pozoMonto">0.00</span></div>
-</div>
-<div class="botones-pozo">
-<button class="btn-depositar" id="btnDepositar">DEPOSITAR</button>
-<button class="btn-yape" id="btnYape">PAGAR CON YAPE</button>
-</div>
-<div id="textoLimite" class="limite-dia hidden"></div>
-<div class="qr-box" id="qrBox">
-<div class="qr-monto" id="qrMontoTexto">S/. 5.00</div>
-<img id="qrImgMostrado" class="qr-img" src="">
-<div class="qr-text">Escanea con tu app Yape</div>
-<button class="btn-iryape" id="btnIrYape">Ir a Yape</button>
-</div>
-<div class="transacciones-box">
-<h3>Transacciones</h3>
-<div id="listaDepositantes"></div>
-</div>
-<div class="chat-box">
-<div class="chat-input">
-<input type="text" id="chatInput" placeholder="Escribe un mensaje...">
-<button class="btn-enviar" id="btnEnviarChat">Enviar</button>
-</div>
-<div id="chatMensajes" style="margin-top:15px;max-height:200px;overflow-y:auto"></div>
-</div>
-</div></div>
-
-<div id="notiDeposito"></div>
-
-<div class="page active" id="page-inicio">
-<div class="header"><button class="menu-btn" id="btnAbrirMenu">☰</button><div class="logo-activos"><div class="punto-verde"></div><span id="totalUsuarios">0</span> Activos</div></div>
-<div class="banner"><h1>Hasta S/5000</h1><p>Retiros instantáneos y seguros</p></div>
-<div class="bottom-menu">
-<div class="menu-item active" data-page="inicio">Inicio</div>
-<div class="menu-item" data-page="registros">Registros</div>
-<div class="menu-item" data-page="stats">Stats</div>
-<div class="menu-item" data-page="perfil">Perfil</div>
-</div>
-<div class="search"><input type="text" id="buscador" placeholder="🔍 Buscar registro..."></div>
-<div class="botones-top"><button class="btn-crear" id="btnAbrirModal">+ Crear Registro</button><button class="btn-total" id="btnAbrirTotal">TOTAL</button><button class="btn-analisis" id="btnAbrirAnalisis">ANALISIS</button></div>
-<div class="tabs" id="tabsContainer"></div>
-<div id="seccionesContainer"></div>
-</div>
-  <div class="page" id="page-registros">
-<div class="page-header">
-<button id="btnAtrasRegistros" class="btn-atras-nuevo">
-<svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h3>Registros</h3>
-</div>
-<div id="listaRegistros"></div>
-</div>
-
-<div class="page" id="page-stats">
-<div class="page-header">
-<button id="btnAtrasStats" class="btn-atras-nuevo">
-<svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h3>Estadísticas</h3>
-</div>
-<div style="padding:16px">
-<div class="stats-grid"><div class="stats-card"><div class="stats-num" id="statTotalPozos">0</div><div>Registros</div></div><div class="stats-card"><div class="stats-num">S/.<span id="statTotalInvertido">0.00</span></div><div>Recaudado</div></div></div>
-</div>
-</div>
-
-<div class="page" id="page-perfil">
-<div class="page-header">
-<button id="btnAtrasPerfil" class="btn-atras-nuevo">
-<svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-</div>
-<div class="perfil-container">
-<div class="perfil-header">User Profile</div>
-<div class="perfil-item" id="editarNombre">
-<div><label>Name:</label> <span id="perfilNombre">Usuario</span></div>
-<svg fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-</div>
-<div class="perfil-item" id="editarEmail">
-<div><label>Email:</label> <span id="perfilEmail">usuario@email.com</span></div>
-<svg fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-</div>
-<div class="perfil-item" id="editarTelefono">
-<div><label>Phone:</label> <span id="perfilTelefono">999-999-999</span></div>
-<svg fill="none" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-</div>
-<div style="margin-top:30px;font-size:12px;color:#999;text-align:right;font-weight:700">Dola AI</div>
-</div>
-</div>
-</div>
-
-<div class="page" id="page-notificaciones">
-<div class="page-header">
-<button id="btnAtrasNoti" class="btn-atras-nuevo">
-<svg fill="none" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-</button>
-<h3>Notificaciones</h3>
-</div>
-<div id="listaNotificaciones" style="padding:16px"></div>
-</div>
-
-<script>
-// YA NO BORRA NADA - AHORA CARGA LO GUARDADO
-let datosTemp = {}; let otpGenerado = 0; let intervaloGlobal=null; let intervaloGrafico=null; let qrTempBase64="";
-let saldo=0;
-let pozos= JSON.parse(localStorage.getItem('eluck_pozos')) || {}; // CARGAR
-let pozosCount= parseInt(localStorage.getItem('eluck_count')) || 0; // CARGAR
-let registros= JSON.parse(localStorage.getItem('eluck_registros')) || []; // CARGAR
-let notificaciones= JSON.parse(localStorage.getItem('eluck_notis')) || []; // CARGAR
-let pozoAbiertoID=null;
-let precioActual=50,datosGrafico=[],volumenGrafico=[],xGrafico=0,tendenciaGrafico=0;
-let depositoPendiente = null;
-
-const LIMITE_DIARIO = 200;
-
-let hoy = new Date().toISOString().split('T')[0];
-let limiteData = JSON.parse(localStorage.getItem('eluck_limite')) || {fecha: hoy, total: 0};
-if(limiteData.fecha!== hoy){ limiteData = {fecha: hoy, total: 0}; } // Reinicia cada día
-
-function getUsers(){ return JSON.parse(localStorage.getItem('usuarios')) || []; }
-function saveUsers(users){ localStorage.setItem('usuarios', JSON.stringify(users)); }
-function getSesion(){ return localStorage.getItem('sesion_activa'); }
-function setSesion(email){ localStorage.setItem('sesion_activa', email); }
-function guardarDatos(){
-  localStorage.setItem('eluck_saldo',saldo);
-  localStorage.setItem('eluck_pozos',JSON.stringify(pozos));
-  localStorage.setItem('eluck_count',pozosCount);
-  localStorage.setItem('eluck_registros',JSON.stringify(registros));
-  localStorage.setItem('eluck_notis',JSON.stringify(notificaciones));
-  localStorage.setItem('eluck_limite',JSON.stringify(limiteData))
-}
-function guardarPerfil(){localStorage.setItem('eluck_perfil', JSON.stringify(perfilDatos))}
-
-let perfilDatos = JSON.parse(localStorage.getItem('eluck_perfil')) || {nombre:'Usuario', email:'usuario@email.com', telefono:'999-999-999'};
-
-function getTotalAcumuladoDia(){ return limiteData.total; }
-function puedeDepositar(monto){ return (limiteData.total + monto) <= LIMITE_DIARIO; }
-
-function mostrarNoti(usuario, monto, pozoNombre){
-  const noti = document.getElementById('notiDeposito');
-  noti.innerHTML = `💰 @${usuario} depositó S/.${monto.toFixed(2)} en ${pozoNombre}`;
-  noti.style.display = 'block';
-  setTimeout(()=>{noti.style.display='none'}, 3000);
-  notificaciones.unshift({id: Date.now(),texto: `@${usuario} depositó S/.${monto.toFixed(2)} en ${pozoNombre}`,hora: new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})});
-  guardarDatos();
-  pintarNotificaciones();
-}
-
-function pintarNotificaciones(){
-  const cont = document.getElementById('listaNotificaciones');
-  if(notificaciones.length==0){cont.innerHTML = '<div style="text-align:center;color:#999;padding:40px;font-weight:700">No tienes notificaciones</div>';return}
-  cont.innerHTML = notificaciones.map(n=>`<div style="background:#fff;border-radius:12px;padding:14px;margin-bottom:10px"><div style="font-weight:900;font-size:14px">${n.texto}</div><div style="font-size:12px;color:#999;font-weight:700">${n.hora}</div></div>`).join('');
-}
-
-function actualizarTotalUsuarios(){
-  const users = getUsers();
-  document.getElementById('totalUsuarios').innerText = users.length;
-}
-
-function getTotalAcumulado(){
-  return registros.filter(r=>pozos[r.id]).reduce((a,r)=>a+pozos[r.id].monto,0);
-}
-
-function actualizarTodosLosMontos(){
-  document.querySelectorAll('.card').forEach(card=>{
-    const id = card.dataset.id;
-    if(pozos[id]){
-      card.querySelector('.card-monto').innerText = 'S/.' + pozos[id].monto.toFixed(2);
-    }
-  });
-  if(pozoAbiertoID && pozos[pozoAbiertoID]){
-    document.getElementById('pozoMonto').innerText=pozos[pozoAbiertoID].monto.toFixed(2);
-  }
-  const totalModal = document.getElementById('totalFullscreen');
-  if(totalModal && totalModal.classList.contains('active')){
-    document.getElementById('totalAcumuladoNum').innerText='S/'+getTotalAcumulado().toFixed(2);
-  }
-  if(document.getElementById('page-registros').classList.contains('active')){
-    document.querySelector('[data-page="registros"]').click();
-  }
-  actualizarAnalisis();
-}
-
-function verificarLimite(){
-  const btn = document.getElementById('btnDepositar');
-  const texto = document.getElementById('textoLimite');
-  if(!btn ||!texto) return;
-  if(limiteData.total >= LIMITE_DIARIO){
-    btn.disabled = true;
-    btn.style.background = '#ccc';
-    texto.classList.remove('hidden');
-    texto.innerText = `Límite diario alcanzado: S/.${LIMITE_DIARIO}. Se reinicia mañana.`;
-  }else{
-    btn.disabled = false;
-    btn.style.background = '#000';
-    texto.classList.add('hidden');
-  }
-}
-
-function entrarApp(email){
-  document.getElementById('pantallaLogin').classList.add('hidden');
-  document.getElementById('pantallaApp').classList.remove('hidden');
-  actualizarTotalUsuarios();
-  generarTabs(); // Carga los registros guardados
-  pintarNotificaciones();
-}
-
-function generarTabs(){
-  const tabs=document.getElementById('tabsContainer');
-  const sec=document.getElementById('seccionesContainer');
-  tabs.innerHTML='';
-  const depsConPozos=[...new Set(Object.values(pozos).map(p=>p.valorDeposito))].sort((a,b)=>a-b);
-  if(depsConPozos.length==0){tabs.innerHTML='<div style="padding:10px 16px;color:#666;font-weight:700">Crea tu primer registro</div>';sec.innerHTML='';return}
-  depsConPozos.forEach((dep,i)=>{
-    const tab=document.createElement('div');
-    tab.className='tab '+(i==0?'active':'');
-    tab.innerText='S/. '+dep;
-    tab.onclick=()=>pintarSeccion(dep,tab);
-    tabs.appendChild(tab);
-  });
-  pintarSeccion(depsConPozos[0], tabs.children[0])
-}
-
-function pintarSeccion(dep,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  if(el)el.classList.add('active');
-  const sec=document.getElementById('seccionesContainer');
-  const pozosDep=Object.entries(pozos).filter(([id,p])=>p.valorDeposito==dep);
-  let html=`<h3>Depósito S/.${dep}</h3><div class="populares">`;
-  pozosDep.forEach(([id,data])=>{
-    html+=`<div class="card" data-id="${id}"><div class="card-left"><div class="card-icon">S</div><div><div class="card-titulo">${data.nombre}</div><div class="card-nombre">@${data.usuario}</div></div></div><div class="card-right"><div class="card-monto">S/.${data.monto.toFixed(2)}</div><div class="card-precio">Entrada S/.${data.valorDeposito}</div></div></div>`
-  });
-  html+='</div>';sec.innerHTML=html;
-  sec.querySelectorAll('.card').forEach(c=>c.onclick=()=>abrirPozo(c.dataset.id))
-}
-
-function abrirPozo(id){
-  pozoAbiertoID=id;
-  const data=pozos[id];
-  data.depositantes = data.depositantes || [];
-  data.chat = data.chat || [];
-  document.getElementById('pozoModal').classList.add('active');
-  document.getElementById('pozoMonto').innerText=data.monto.toFixed(2);
-  document.getElementById('qrBox').style.display='none';
-  pintarDepositantes();
-  verificarLimite();
-  document.getElementById('chatMensajes').innerHTML = data.chat.map(m=>`<div style="margin-bottom:8px;font-weight:700"><b>@${m.u}:</b> ${m.t}</div>`).join('');
-}
-
-function cerrarPozo(){document.getElementById('pozoModal').classList.remove('active')}
-
-function pintarDepositantes(){
-  const data=pozos[pozoAbiertoID];
-  const cont=document.getElementById('listaDepositantes');
-  const ultimas=data.depositantes.slice(-5);
-  if(ultimas.length==0){cont.innerHTML='<div style="color:#999;text-align:center;padding:20px;font-weight:700">Esperando transacciones...</div>';return}
-  cont.innerHTML=ultimas.map(d=>`<div class="depositante-item"><div class="depositante-left"><div class="depositante-icon">${d.u.charAt(0).toUpperCase()}</div><div><div class="depositante-nombre">@${d.u}</div><div class="depositante-desc">Depósito al registro</div></div></div><div class="depositante-monto">+ S/ ${d.monto.toFixed(2)}</div></div>`).join('')
-}
-
-function buscarJuego(){
-  const texto=document.getElementById('buscador').value.toLowerCase();
-  document.querySelectorAll('.card').forEach(card=>{
-    const titulo=card.querySelector('.card-titulo').innerText.toLowerCase();
-    card.style.display = titulo.includes(texto)? 'flex' : 'none';
-  })
-}
-
-function cargarQR(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){qrTempBase64=e.target.result;document.getElementById('previewQR').src=qrTempBase64;document.getElementById('previewQR').style.display='block'};reader.readAsDataURL(file)}
-
-function generarDatosGraficoInicial(){let precio=50;for(let i=0;i<100;i++){let cambio=(Math.random()-0.5)*0.8;precio+=cambio;datosGrafico.push({x:i,open:precio,high:precio+0.3,low:precio-0.3,close:precio});volumenGrafico.push(Math.random()*30+10)}}
-function simularMercadoGrafico(){const misPozos=registros.filter(r=>pozos[r.id]);let gananciaTotal=misPozos.reduce((a,r)=>a+pozos[r.id].monto,0);let presion=gananciaTotal/1000;tendenciaGrafico=tendenciaGrafico*0.85+presion*0.15;let ruido=(Math.random()-0.5)*0.6;precioActual+=tendenciaGrafico+ruido;if(precioActual<15)precioActual=15;}
-function actualizarGraficoAnalisis(){
-  let trace={x:datosGrafico.map(d=>d.x),open:datosGrafico.map(d=>d.open),high:datosGrafico.map(d=>d.high),low:datosGrafico.map(d=>d.low),close:datosGrafico.map(d=>d.close),type:'candlestick',increasing:{line:{color:'#00C853'}},decreasing:{line:{color:'#FF3B30'}}};
-  let layout={paper_bgcolor:'#000',plot_bgcolor:'#000',font:{color:'#666'},margin:{l:40,r:40,t:20,b:20},xaxis:{showgrid:false},yaxis:{showgrid:true,gridcolor:'#222'}};
-  Plotly.newPlot('graficoAnalisis',[trace],layout,{displayModeBar:false});
-}
-function iniciarGrafico(){datosGrafico=[];generarDatosGraficoInicial();actualizarGraficoAnalisis();intervaloGrafico=setInterval(()=>{simularMercadoGrafico();actualizarGraficoAnalisis()},1000)}
-function detenerGrafico(){clearInterval(intervaloGrafico)}
-function actualizarAnalisis(){const misPozos=registros.filter(r=>pozos[r.id]);let total=misPozos.reduce((a,r)=>a+pozos[r.id].monto,0);document.getElementById('analisisTotalAcumulado').innerText=total.toFixed(2);document.getElementById('analisisTotalPozos').innerText=misPozos.length}
-
-function editarCampo(campo, label){
-  const nuevo = prompt(`Editar ${label}:`, perfilDatos[campo]);
-  if(nuevo && nuevo.trim()!== ''){
-    perfilDatos[campo] = nuevo.trim();
-    guardarPerfil();
-    document.getElementById('perfil'+campo.charAt(0).toUpperCase()+campo.slice(1)).innerText = nuevo.trim();
-  }
-}
-
-function eliminarRegistro(id){
-  if(confirm('¿Seguro que quieres eliminar este registro?')){
-    delete pozos[id];
-    registros = registros.filter(r=>r.id!==id);
-    guardarDatos();
-    generarTabs();
-    document.querySelector('[data-page="registros"]').click();
-  }
-}
-
-function aprobarDeposito(){
-  if(!depositoPendiente) return;
-  const {pozoId, monto} = depositoPendiente;
-  const data = pozos[pozoId];
-
-  if(!puedeDepositar(monto)) return alert(`Límite diario S/.${LIMITE_DIARIO} alcanzado.`);
-
-  data.monto += monto;
-  limiteData.total += monto;
-  data.depositantes = data.depositantes || [];
-  data.depositantes.push({u:'tu',monto:monto});
-
-  guardarDatos();
-  mostrarNoti('tu', monto, data.nombre);
-  actualizarTodosLosMontos();
-  pintarDepositantes();
-  verificarLimite();
-
-  document.getElementById('qrBox').style.display='none';
-  depositoPendiente = null;
-  alert('✅ Depósito Aprobado');
-}
-
-function rechazarDeposito(){
-  document.getElementById('qrBox').style.display='none';
-  depositoPendiente = null;
-  alert('❌ Depósito Rechazado');
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('perfilNombre').innerText = perfilDatos.nombre;
-  document.getElementById('perfilEmail').innerText = perfilDatos.email;
-  document.getElementById('perfilTelefono').innerText = perfilDatos.telefono;
-
-  document.getElementById('editarNombre').onclick = () => editarCampo('nombre','Nombre');
-  document.getElementById('editarEmail').onclick = () => editarCampo('email','Email');
-  document.getElementById('editarTelefono').onclick = () => editarCampo('telefono','Teléfono');
-
-  document.getElementById('buscador').onkeyup=buscarJuego;
-  document.getElementById('btnSubirQR').onclick=()=>document.getElementById('fileQR').click();
-  document.getElementById('fileQR').onchange=cargarQR;
-  document.getElementById('btnEnviarChat').onclick=()=>{
-    const txt=document.getElementById('chatInput').value;
-    if(!txt)return;
-    pozos[pozoAbiertoID].chat = pozos[pozoAbiertoID].chat || [];
-    pozos[pozoAbiertoID].chat.push({u:'tu',t:txt});
-    document.getElementById('chatInput').value='';
-    document.getElementById('chatMensajes').innerHTML=pozos[pozoAbiertoID].chat.map(m=>`<div style="margin-bottom:8px;font-weight:700"><b>@${m.u}:</b> ${m.t}</div>`).join('');
-    guardarDatos();
-  }
-  document.getElementById('btnIrYape').onclick=()=>{window.open('https://www.yape.com.pe','_blank')}
-
-  document.getElementById('btnIngresar').onclick=()=>{const email = document.getElementById("loginEmail").value;const password = document.getElementById("loginPassword").value;const user = getUsers().find(u => u.email === email && u.password === password);if(user){ setSesion(email); entrarApp(email); } else { alert("❌ Incorrecto"); }}
-  document.getElementById('btnMostrarRegistro').onclick=()=>{document.getElementById("formLogin").classList.add("hidden");document.getElementById("formRegistro").classList.remove("hidden")}
-  document.getElementById('btnVolverLogin').onclick=()=>{document.getElementById("formRegistro").classList.add("hidden");document.getElementById("formLogin").classList.remove("hidden")}
-  document.getElementById('btnEnviarCodigo').onclick=()=>{const email = document.getElementById("email").value;const password = document.getElementById("password").value;if(!email ||!password) return alert("Completa");datosTemp = { email, password };otpGenerado = Math.floor(100000 + Math.random() * 900000);alert("Tu código: " + otpGenerado);document.getElementById("formRegistro").classList.add("hidden");document.getElementById("formVerificar").classList.remove("hidden")}
-  document.getElementById('btnVerificar').onclick=()=>{if(document.getElementById("otpInput").value == otpGenerado) {const users = getUsers(); users.push(datosTemp); saveUsers(users);setSesion(datosTemp.email); entrarApp(datosTemp.email);} else { alert("❌ Código incorrecto"); }}
-
-  document.getElementById('btnAbrirMenu').onclick=()=>{document.getElementById('sideMenu').classList.add('active');document.getElementById('sideOverlay').classList.add('active'); document.getElementById('correoMenu').innerText = getSesion() || ''}
-  document.getElementById('btnCerrarMenu').onclick=()=>{document.getElementById('sideMenu').classList.remove('active');document.getElementById('sideOverlay').classList.remove('active')}
-  document.getElementById('sideOverlay').onclick=()=>{document.getElementById('sideMenu').classList.remove('active');document.getElementById('sideOverlay').classList.remove('active')}
-
-  document.getElementById('btnCerrarSesion').onclick=()=>{localStorage.removeItem('sesion_activa');location.reload()}
-  document.getElementById('btnAbrirModal').onclick=()=>document.getElementById('modal').classList.add('active')
-  document.getElementById('btnCerrarModal').onclick=()=>document.getElementById('modal').classList.remove('active')
-  document.getElementById('btnCerrarPozo').onclick=cerrarPozo;
-  document.getElementById('btnAbrirTotal').onclick=()=>{document.getElementById('totalAcumuladoNum').innerText='S/'+getTotalAcumulado().toFixed(2);document.getElementById('totalFullscreen').classList.add('active')}
-  document.getElementById('btnCerrarTotal').onclick=()=>document.getElementById('totalFullscreen').classList.remove('active')
-  document.getElementById('btnAbrirAnalisis').onclick=()=>{actualizarAnalisis();document.getElementById('analisisModal').classList.add('active');iniciarGrafico()}
-  document.getElementById('btnCerrarAnalisis').onclick=()=>{document.getElementById('analisisModal').classList.remove('active');detenerGrafico()}
-  document.getElementById('btnAtrasRegistros').onclick=()=>document.querySelector('[data-page="inicio"]').click()
-  document.getElementById('btnAtrasStats').onclick=()=>document.querySelector('[data-page="inicio"]').click()
-  document.getElementById('btnAtrasPerfil').onclick=()=>document.querySelector('[data-page="inicio"]').click()
-  document.getElementById('btnAtrasNoti').onclick=()=>document.querySelector('[data-page="inicio"]').click()
-  document.getElementById('btnAbrirNoti').onclick=()=>{document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-notificaciones').classList.add('active');pintarNotificaciones()}
-
-  document.querySelectorAll('.menu-item').forEach(btn=>{
-    btn.onclick=()=>{
-      document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-      document.querySelectorAll('.menu-item').forEach(x=>x.classList.remove('active'));
-      document.getElementById('page-'+btn.dataset.page).classList.add('active');
-      btn.classList.add('active');
-      if(btn.dataset.page=='registros'){
-        const misPozos=registros.filter(r=>pozos[r.id]);
-        if(misPozos.length==0){
-          document.getElementById('listaRegistros').innerHTML='<div style="text-align:center;color:#999;padding:40px;font-weight:700">No tienes registros</div>';
-        }else{
-          document.getElementById('listaRegistros').innerHTML=misPozos.map(r=>{
-            const data=pozos[r.id];
-            return `<div class="registro-card">
-              <div onclick="abrirPozo('${r.id}')" style="display:flex;align-items:center;gap:12px;flex:1;cursor:pointer">
-                <div class="card-icon">S</div>
-                <div><div style="font-size:16px;font-weight:900">${r.nombre}</div><div style="font-size:12px;color:#666;font-weight:700">@${r.usuario} • Entrada S/.${r.valorDeposito}</div></div>
-              </div>
-              <div style="color:#00C853;font-weight:900;font-size:16px;margin-right:10px">S/.${data.monto.toFixed(2)}</div>
-              <button onclick="eliminarRegistro('${r.id}')" class="btn-eliminar">
-                <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
-              </button>
-            </div>`
-          }).join('');
-        }
-      }
-      if(btn.dataset.page=='stats'){
-        const misPozos=registros.filter(r=>pozos[r.id]);
-        document.getElementById('statTotalPozos').innerText=misPozos.length;
-        let total=misPozos.reduce((a,r)=>a+pozos[r.id].monto,0);
-        document.getElementById('statTotalInvertido').innerText=total.toFixed(2);
-      }
-      if(btn.dataset.page=='perfil'){
-        document.getElementById('perfilNombre').innerText = perfilDatos.nombre;
-        document.getElementById('perfilEmail').innerText = perfilDatos.email;
-        document.getElementById('perfilTelefono').innerText = perfilDatos.telefono;
-      }
-    }
-  })
-
-  document.getElementById('btnCrearJuego').onclick=()=>{
-    const nombre=document.getElementById('nombreJuego').value.trim();
-    const usuario=document.getElementById('usuarioJuego').value.trim();
-    const correo=document.getElementById('correoJuego').value.trim();
-    const dep=parseInt(document.getElementById('selectDeposito').value);
-    if(!nombre||!usuario||!correo)return alert('Completa todos los campos');
-    if(!qrTempBase64)return alert('Sube tu QR de Yape');
-    if(Object.values(pozos).find(p=>p.valorDeposito==dep))return alert('Ya existe registro de S/.'+dep);
-    pozosCount++;const id='p'+Date.now();
-    pozos[id]={monto:0,nombre:nombre,usuario:usuario,correo:correo,valorDeposito:dep,qr:qrTempBase64,depositantes:[],chat:[]};
-    registros.unshift({id:id,nombre:nombre,usuario:usuario,valorDeposito:dep});
-    guardarDatos();generarTabs();document.getElementById('modal').classList.remove('active');
-    document.getElementById('nombreJuego').value='';document.getElementById('usuarioJuego').value='';document.getElementById('correoJuego').value='';qrTempBase64="";document.getElementById('previewQR').style.display='none';
-    setTimeout(()=>abrirPozo(id),100)
-  }
-
-  document.getElementById('btnDepositar').onclick=()=>{
-    const data=pozos[pozoAbiertoID];
-    const monto=data.valorDeposito;
-    if(!puedeDepositar(monto)) return alert(`Límite diario S/.${LIMITE_DIARIO} alcanzado. Te faltan S/.${(LIMITE_DIARIO - limiteData.total).toFixed(2)}`);
-
-    depositoPendiente = {pozoId: pozoAbiertoID, monto: monto};
-
-    const qrBox = document.getElementById('qrBox');
-    qrBox.style.display='block';
-    qrBox.innerHTML = `
-      <div style="text-align:left;margin-bottom:15px;font-weight:900;font-size:17px">Pendientes de Validar</div>
-      <img id="qrImgMostrado" class="qr-img" src="${data.qr}">
-      <div style="text-align:left;margin:12px 0;font-weight:700;font-size:15px">
-        <div><b>Monto:</b> S/${monto.toFixed(2)}</div>
-        <div><b>Fecha:</b> ${new Date().toLocaleString('es-PE')}</div>
+  <!-- SCREEN 1: HOME -->
+  <div id="screen1">
+    <div class="top-bar">
+      <div class="top-left">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span id="contadorGlobal">0</span>
       </div>
-      <div style="display:flex;gap:10px">
-        <button onclick="aprobarDeposito()" class="btn-aprobar">✅ Aprobar</button>
-        <button onclick="rechazarDeposito()" class="btn-rechazar">❌ Rechazar</button>
+      <div class="top-right">
+        <button class="btn-outline" onclick="goTo(3)">Registrate</button>
+        <button class="btn-text">Acceder</button>
+      </div>
+    </div>
+    
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar por sala/username/pagador..." onkeyup="filtrarSalas()">
+    </div>
+    <div id="salasList"></div>
+  </div>
+
+  <!-- SCREEN 2: SALA -->
+  <div id="screen2" class="hidden">
+    <div class="header-back" onclick="salirSala()">← Volver</div>
+    <div class="sala-header">
+      <div class="sala-total" id="total">S/0</div>
+      <div class="participants" style="justify-content: center; margin-bottom: 6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#00C853"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span id="salaParticipantes">0 activos</span>
+      </div>
+      <div class="sala-contador" id="contadorPagos">0/5 pagos hoy</div>
+      <div id="alertaLimiteDia"></div>
+    </div>
+
+    <!-- SALA TOP: SELECTOR + PAGAR + BOTÓN QR CON EL MISMO DISEÑO -->
+    <div class="sala-top">
+      <div class="monto-select" id="montoSelectBtn" onclick="toggleMontos()">
+        <span id="montoSeleccionado">S/ 1</span>
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        <div class="monto-opciones" id="montoOpciones">
+          <div class="monto-opt active" onclick="seleccionarMonto(1, event)">S/ 1</div>
+          <div class="monto-opt" onclick="seleccionarMonto(2, event)">S/ 2</div>
+          <div class="monto-opt" onclick="seleccionarMonto(3, event)">S/ 3</div>
+          <div class="monto-opt" onclick="seleccionarMonto(4, event)">S/ 4</div>
+          <div class="monto-opt" onclick="seleccionarMonto(5, event)">S/ 5</div>
+        </div>
+      </div>
+
+      <button class="btn-pagar" id="btnPagar" onclick="pagar()">Pagar</button>
+      <button class="btn-qr-toggle" id="btnToggleQR" onclick="toggleQR()">Ver QR</button>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">Ganancias</div>
+      <div class="tab">Pagos</div>
+    </div>
+
+    <!-- QR OCULTO POR DEFECTO -->
+    <div class="qr-container" id="qrContainer">
+      <img id="qrSala" src="" alt="QR Yape">
+    </div>
+
+    <!-- LISTA DE PAGOS TIPO NOTIFICACIÓN (NOMBRE A LA IZQUIERDA, PRECIO A LA DERECHA) -->
+    <div class="user-list" id="userList"></div>
+
+    <div class="chat-section-title">Chat de la Sala</div>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input id="chatInput" type="text" placeholder="Escribe un mensaje en la sala..." onkeypress="if(event.key==='Enter') enviarMensajeSala()">
+      <div class="send-btn" onclick="enviarMensajeSala()">➤</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: CREAR SALA -->
+  <div id="screen3" class="hidden">
+    <div class="header-back" onclick="goTo(1)">← Volver</div>
+    <div class="create-container">
+      <h1 class="create-title">Crear Sala</h1>
+      <div id="alertLimite"></div>
+      <div class="input-group">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <input id="inputUsername" placeholder="Tu Username único" onkeyup="validarUsername()">
+      </div>
+      <div id="errorUsername" class="error"></div>
+      <div class="input-group">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <input id="inputNombre" placeholder="Tu Nombre">
+      </div>
+      <div class="input-group">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2.9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <input id="inputQR" placeholder="Selecciona tu QR" readonly>
+        <button class="qr-btn" onclick="document.getElementById('qrUpload').click()">Subir</button>
+        <input type="file" id="qrUpload" accept="image/*" style="display:none" onchange="cargarQR(event)">
+      </div>
+      <img id="previewQR" style="display:none; width:100px; height:100px; margin:10px auto; border-radius:8px; object-fit:contain;">
+      <div class="btn-row">
+        <button class="btn-black" id="btnCrear" onclick="crearSala()">CREAR SALA</button>
+        <button class="btn-gray" onclick="goTo(1)">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: CHAT GLOBAL -->
+  <div id="screen4" class="hidden">
+    <div class="header-back" onclick="goTo(1)">← Volver</div>
+    <div class="chat-section-title">Chat Global de la Comunidad</div>
+    <div class="chat-box" id="chatGlobalBox" style="height: 65vh;"></div>
+    <div class="chat-input">
+      <input id="chatGlobalInput" type="text" placeholder="Escribe al chat global..." onkeypress="if(event.key==='Enter') enviarMensajeGlobal()">
+      <div class="send-btn" onclick="enviarMensajeGlobal()">➤</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: NOTIFICACIONES -->
+  <div id="screen5" class="hidden">
+    <div class="header-back" onclick="goTo(1)">← Volver</div>
+    <div class="notif-container" id="notifList"></div>
+  </div>
+
+  <!-- MENU INFERIOR -->
+  <div class="navbar">
+    <div class="nav-item" onclick="goTo(1)"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="goTo(4)"><svg viewBox="0 0 24 24"><path d="M17 2H7C5.9 2 5 2.9 5 4v16l7-3 7 3V4c0-1.1-.9-2-2-2z"/></svg><span>Chats</span></div>
+    <div class="nav-item" onclick="goTo(3)"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span>Create</span></div>
+    <div class="nav-item" onclick="goTo(5)">
+      <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+      <div class="nav-badge hidden" id="notifBadge"></div>
+      <span>Notifications</span>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getDatabase, ref, set, remove, get, onValue, push, onDisconnect } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD_OgFQRdkDVNSQPq48zNE6s1J7Y7I__js",
+  authDomain: "pagos-yape-4968b.firebaseapp.com",
+  databaseURL: "https://pagos-yape-4968b-default-rtdb.firebaseio.com",
+  projectId: "pagos-yape-4968b",
+  storageBucket: "pagos-yape-4968b.firebasestorage.app",
+  messagingSenderId: "104083728326",
+  appId: "1:104083728326:web:fc2fd7ee876a60f45434c7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let salas = {};
+let salaActivaId = null;
+let miPresenciaSalaRef = null;
+let montoActual = 1;
+let usuarioActual = localStorage.getItem('app_user') || "";
+let totalDia = 0;
+let fechaTotal = new Date().toDateString();
+let notificacionesLocales = JSON.parse(localStorage.getItem('app_notifs') || "[]");
+
+let sessionId = sessionStorage.getItem('app_session_id');
+if(!sessionId){
+  sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+  sessionStorage.setItem('app_session_id', sessionId);
+}
+
+window.onload = async () => {
+  await revisarDia();
+  escucharSalas();
+  escucharGlobal();
+  iniciarPresenciaGlobalEnTiempoReal();
+  verificarLimiteSala();
+  if(notificacionesLocales.length === 0){
+    agregarNotif("system", "Sistema", "Bienvenido a la plataforma de Pagos Yape");
+  } else {
+    renderNotificaciones();
+  }
+}
+
+window.addEventListener('beforeunload', () => {
+  if(miPresenciaSalaRef){
+    remove(miPresenciaSalaRef);
+  }
+});
+
+function iniciarPresenciaGlobalEnTiempoReal(){
+  const connectedRef = ref(db, ".info/connected");
+  const miGlobalRef = ref(db, 'gente_conectada/' + sessionId);
+  const listaGlobalRef = ref(db, 'gente_conectada/');
+
+  onValue(connectedRef, (snap) => {
+    if (snap.val() === true) {
+      onDisconnect(miGlobalRef).remove();
+      set(miGlobalRef, true);
+    }
+  });
+
+  onValue(listaGlobalRef, (snap) => {
+    const totalConectados = snap.exists() ? Object.keys(snap.val()).length : 0;
+    document.getElementById('contadorGlobal').textContent = totalConectados;
+  });
+}
+
+// CONTROL DE DÍA ESTRICTO
+async function revisarDia(){
+  let hoy = new Date().toDateString();
+  const estSnap = await get(ref(db, 'estadisticas'));
+  let est = estSnap.val() || {};
+
+  if(est.fechaTotal !== hoy){
+    totalDia = 0;
+    fechaTotal = hoy;
+    await set(ref(db, 'estadisticas'), {totalDia: 0, fechaTotal: hoy});
+  } else {
+    totalDia = est.totalDia || 0;
+    fechaTotal = hoy;
+  }
+}
+
+async function goTo(n) {
+  await revisarDia();
+  if(salaActivaId && n !== 2){
+    removerPresenciaSalaActual();
+  }
+
+  document.querySelectorAll('#screen1, #screen2, #screen3, #screen4, #screen5').forEach(s => s.classList.add('hidden'));
+  document.getElementById('screen' + n).classList.remove('hidden');
+  if(n == 1) renderSalas();
+  if(n == 3) verificarLimiteSala();
+  if(n == 5) {
+    document.getElementById('notifBadge').classList.add('hidden');
+    renderNotificaciones();
+  }
+}
+
+function removerPresenciaSalaActual(){
+  if(miPresenciaSalaRef){
+    onDisconnect(miPresenciaSalaRef).cancel();
+    remove(miPresenciaSalaRef);
+    miPresenciaSalaRef = null;
+  }
+  salaActivaId = null;
+}
+
+function salirSala(){
+  removerPresenciaSalaActual();
+  document.getElementById('qrContainer').style.display = 'none';
+  document.getElementById('btnToggleQR').innerText = 'Ver QR';
+  goTo(1);
+}
+
+// MUESTRA Y OCULTA EL QR
+function toggleQR() {
+  const qr = document.getElementById('qrContainer');
+  const btn = document.getElementById('btnToggleQR');
+  if (qr.style.display === 'none' || qr.style.display === '') {
+    qr.style.display = 'block';
+    btn.innerText = 'Ocultar QR';
+  } else {
+    qr.style.display = 'none';
+    btn.innerText = 'Ver QR';
+  }
+}
+
+// SELECTOR DE MONTO CON ESTILO NEGRO
+function toggleMontos(){ 
+  document.getElementById('montoOpciones').classList.toggle('show'); 
+  document.getElementById('montoSelectBtn').classList.toggle('open');
+}
+
+function seleccionarMonto(m, event){ 
+  if(event) event.stopPropagation();
+  montoActual = m; 
+  document.getElementById('montoSeleccionado').innerText = 'S/ ' + m; 
+  document.getElementById('montoOpciones').classList.remove('show'); 
+  document.getElementById('montoSelectBtn').classList.remove('open');
+  
+  document.querySelectorAll('.monto-opt').forEach(opt => opt.classList.remove('active'));
+  if(event && event.target) {
+    event.target.classList.add('active');
+  }
+}
+
+document.addEventListener('click', function(e){ 
+  if(!e.target.closest('.monto-select')){ 
+    document.getElementById('montoOpciones').classList.remove('show'); 
+    let btn = document.getElementById('montoSelectBtn');
+    if(btn) btn.classList.remove('open');
+  } 
+});
+
+function verificarLimiteSala(){
+  let alertDiv = document.getElementById('alertLimite');
+  let btnCrear = document.getElementById('btnCrear');
+  if(usuarioActual !== ""){
+    alertDiv.innerHTML = `<div class="alert">Ya tienes una cuenta: @${usuarioActual}. Solo puedes tener 1 sala.</div>`;
+    btnCrear.innerText = "YA TIENES CUENTA"; btnCrear.disabled = true;
+  } else { alertDiv.innerHTML = ""; btnCrear.innerText = "CREAR SALA"; btnCrear.disabled = false; }
+}
+
+function cargarQR(event){
+  const file = event.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      document.getElementById('inputQR').value = file.name;
+      document.getElementById('inputQR').dataset.src = e.target.result;
+      document.getElementById('previewQR').src = e.target.result;
+      document.getElementById('previewQR').style.display = 'block';
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
+async function validarUsername(){
+  let username = document.getElementById('inputUsername').value.trim();
+  let errorDiv = document.getElementById('errorUsername');
+  let btnCrear = document.getElementById('btnCrear');
+  if(username == ""){ errorDiv.innerText = ""; btnCrear.disabled = false; return; }
+  const snap = await get(ref(db, 'usernames/' + username));
+  if(snap.exists()){ errorDiv.innerText = "Este username ya existe. Elige otro."; btnCrear.disabled = true; }
+  else { errorDiv.innerText = ""; btnCrear.disabled = false; }
+}
+
+async function crearSala(){
+  let username = document.getElementById('inputUsername').value.trim();
+  let nombre = document.getElementById('inputNombre').value.trim();
+  let qr = document.getElementById('inputQR').dataset.src;
+  if(username == "" || nombre == "" || !qr){ alert("Completa Username, Nombre y sube tu QR"); return; }
+  if(usuarioActual !== ""){ alert("Ya tienes una cuenta. Solo puedes crear 1 sala"); return; }
+
+  const snap = await get(ref(db, 'usernames/' + username));
+  if(snap.exists()){ alert("Este username ya está en uso"); return; }
+
+  usuarioActual = username;
+  localStorage.setItem('app_user', username);
+  let id = Date.now();
+  let nuevaSala = { 
+    id, username, nombre, qr, total: 0, pagos: 0, fechaPagos: new Date().toDateString(),
+    pagadores: {}, 
+    chat: {
+      0: {
+        sender: "Sistema",
+        text: `Sala creada por @${username}`,
+        time: Date.now(),
+        type: "system"
+      }
+    } 
+  };
+
+  await set(ref(db, 'salas/' + id), nuevaSala);
+  await set(ref(db, 'usernames/' + username), id);
+  await set(ref(db, 'misSalas/' + username), id);
+
+  agregarNotif("room", "Sala Creada", `Creaste con éxito la sala: ${nombre} (@${username})`);
+  goTo(1);
+}
+
+function filtrarSalas(){
+  let texto = document.getElementById('searchInput').value.toLowerCase();
+  let cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    let nombre = card.querySelector('b').innerText.toLowerCase();
+    let username = card.dataset.username.toLowerCase();
+    let coincide = nombre.includes(texto) || username.includes(texto);
+    card.style.display = coincide ? 'block' : 'none';
+  });
+}
+
+function escucharSalas(){
+  onValue(ref(db, 'salas'), (snap) => {
+    salas = snap.val() || {};
+    renderSalas();
+  });
+}
+
+function renderSalas(){
+  let lista = document.getElementById('salasList');
+  lista.innerHTML = "";
+  if(Object.keys(salas).length == 0){
+    lista.innerHTML = `<div style="text-align:center; padding:40px; color:#999;">No hay salas creadas aún</div>`;
+    return;
+  }
+  Object.values(salas).forEach(sala => {
+    let numParticipantes = sala.presentes ? Object.keys(sala.presentes).length : 0;
+
+    lista.innerHTML += `
+      <div class="card" data-username="${sala.username}" data-id="${sala.id}" onclick="entrarSala(${sala.id})">
+        <div class="card-header">
+          <div class="card-left">
+            <b>${sala.nombre}</b>
+            <small>@${sala.username}</small>
+            <div class="participants">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#00C853"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              ${numParticipantes} ${numParticipantes === 1 ? 'activo' : 'activos'}
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="card-price">S/${sala.total}</div>
+            <div class="menu-btn">⋮</div>
+          </div>
+        </div>
       </div>
     `;
+  });
+}
+
+async function entrarSala(id){
+  await revisarDia();
+  if(usuarioActual == ""){ alert("Primero crea tu cuenta en Registrate"); goTo(3); return; }
+
+  if(salaActivaId && salaActivaId !== id){
+    removerPresenciaSalaActual();
   }
 
-  document.getElementById('btnYape').onclick=()=>{
-    document.getElementById('btnDepositar').click();
+  salaActivaId = id;
+  miPresenciaSalaRef = ref(db, `salas/${id}/presentes/${sessionId}`);
+
+  const connectedRef = ref(db, ".info/connected");
+  onValue(connectedRef, (snap) => {
+    if (snap.val() === true && miPresenciaSalaRef) {
+      onDisconnect(miPresenciaSalaRef).remove();
+      set(miPresenciaSalaRef, {
+        username: usuarioActual,
+        joinedAt: Date.now()
+      });
+    }
+  });
+
+  onValue(ref(db, 'salas/' + id), (snap) => {
+    let sala = snap.val();
+    if(!sala) return;
+
+    let hoy = new Date().toDateString();
+
+    if(sala.fechaPagos !== hoy){
+      sala.pagos = 0;
+      sala.fechaPagos = hoy;
+      set(ref(db, `salas/${id}/pagos`), 0);
+      set(ref(db, `salas/${id}/fechaPagos`), hoy);
+    }
+
+    let numParticipantes = sala.presentes ? Object.keys(sala.presentes).length : 0;
+    document.getElementById('salaParticipantes').innerText = `${numParticipantes} ${numParticipantes === 1 ? 'activo' : 'activos'}`;
+
+    document.getElementById('total').innerText = `S/${sala.total}`;
+    document.getElementById('contadorPagos').innerText = `${sala.pagos}/5 pagos hoy`;
+    document.getElementById('qrSala').src = sala.qr;
+
+    get(ref(db, 'estadisticas')).then(estSnap => {
+      let est = estSnap.val() || {totalDia: 0};
+      totalDia = (est.fechaTotal === hoy) ? (est.totalDia || 0) : 0;
+      let btnPagar = document.getElementById('btnPagar');
+      let alertaDiv = document.getElementById('alertaLimiteDia');
+
+      if(totalDia >= 200){
+        alertaDiv.innerHTML = `<div class="alert-danger">Límite diario de S/200 alcanzado. Se reinicia mañana.</div>`;
+        btnPagar.disabled = true; btnPagar.innerText = "LÍMITE DIARIO";
+      } else if(sala.pagos >= 5){
+        alertaDiv.innerHTML = `<small style="color:#666;">Acumulado hoy: S/${totalDia} / S/200</small>`;
+        btnPagar.disabled = true; btnPagar.innerText = "5/5 PAGOS";
+      } else {
+        alertaDiv.innerHTML = `<small style="color:#666;">Acumulado hoy: S/${totalDia} / S/200</small>`;
+        btnPagar.disabled = false; btnPagar.innerText = "Pagar";
+      }
+    });
+
+    // LISTA DE PAGADORES TIPO NOTIFICACIÓN (NOMBRE IZQ, PRECIO DER)
+    let userList = document.getElementById('userList');
+    userList.innerHTML = "";
+    let pagadores = Object.values(sala.pagadores || {}).reverse();
+
+    if(pagadores.length === 0){
+      userList.innerHTML = `<div style="text-align:center; color:#999; padding:20px; font-size:13px;">Sin pagos registrados aún</div>`;
+    } else {
+      pagadores.forEach(p => {
+        userList.innerHTML += `
+          <div class="payment-card">
+            <span class="payment-user">@${p.nombre}</span>
+            <span class="payment-amount">+ S/ ${p.monto.toFixed(2)}</span>
+          </div>
+        `;
+      });
+    }
+
+    renderChatBox('chatBox', sala.chat);
+  });
+
+  goTo(2);
+}
+
+function pagar() {
+  if(!salaActivaId || !usuarioActual) return;
+  let hoy = new Date().toDateString();
+
+  get(ref(db, 'estadisticas')).then(estSnap => {
+    let est = estSnap.val() || {totalDia: 0, fechaTotal: hoy};
+    let currentTotalDia = (est.fechaTotal === hoy) ? (est.totalDia || 0) : 0;
+
+    if(currentTotalDia >= 200){ alert("Ya alcanzaste el límite de S/200 de hoy"); return; }
+
+    let montoAPagar = montoActual;
+    if(currentTotalDia + montoActual > 200) montoAPagar = 200 - currentTotalDia;
+
+    get(ref(db, 'salas/' + salaActivaId)).then(snap => {
+      let sala = snap.val();
+      if(!sala) return;
+
+      if(sala.fechaPagos !== hoy){
+        sala.pagos = 0;
+        sala.fechaPagos = hoy;
+      }
+
+      if(sala.pagos >= 5){ alert("Esta sala ya completó sus 5 pagos por hoy"); return; }
+
+      sala.total += montoAPagar;
+      sala.pagos += 1;
+      sala.pagadores = sala.pagadores || {};
+      sala.pagadores[usuarioActual] = {nombre: usuarioActual, monto: (sala.pagadores[usuarioActual]?.monto || 0) + montoAPagar};
+      
+      let msgKey = Date.now();
+      sala.chat = sala.chat || {};
+      sala.chat[msgKey] = {
+        sender: "Sistema",
+        text: `@${usuarioActual} realizó un pago de S/${montoAPagar}`,
+        time: Date.now(),
+        type: "system"
+      };
+
+      set(ref(db, 'salas/' + salaActivaId), sala);
+    });
+
+    set(ref(db, 'estadisticas'), { totalDia: currentTotalDia + montoAPagar, fechaTotal: hoy });
+    agregarNotif("payment", "Nuevo Pago", `@${usuarioActual} pagó S/${montoAPagar}`);
+  });
+}
+
+// RENDER CHAT: MIS MENSAJES A LA DERECHA, OTROS A LA IZQUIERDA
+function renderChatBox(boxId, chatData) {
+  let box = document.getElementById(boxId);
+  box.innerHTML = "";
+  if(!chatData) return;
+
+  let yoLimpio = (usuarioActual || "").trim().toLowerCase();
+
+  Object.values(chatData).forEach(m => {
+    if(typeof m === 'string') {
+      box.innerHTML += `<div class="chat-bubble-row system"><div class="chat-bubble">${m}</div></div>`;
+      return;
+    }
+
+    let senderLimpio = (m.sender || "").trim().toLowerCase();
+    let esMio = (senderLimpio === yoLimpio) && yoLimpio !== "";
+    let esSistema = m.type === 'system';
+    
+    let rowClass = esSistema ? 'system' : (esMio ? 'mine' : 'other');
+    let timeFormatted = new Date(m.time || Date.now()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+    let html = `<div class="chat-bubble-row ${rowClass}">`;
+    if(!esMio && !esSistema) {
+      html += `<span class="chat-sender-name">@${m.sender}</span>`;
+    } else if(esSistema) {
+      html += `<span class="chat-sender-name" style="color: #2e7d32;">Sistema</span>`;
+    }
+    html += `<div class="chat-bubble">${m.text}<span class="chat-time">${timeFormatted}</span></div>`;
+    html += `</div>`;
+
+    box.innerHTML += html;
+  });
+
+  box.scrollTop = box.scrollHeight;
+}
+
+function enviarMensajeSala(){
+  let input = document.getElementById('chatInput');
+  let texto = input.value.trim();
+  if(texto === "" || !salaActivaId) return;
+
+  let msgObj = {
+    sender: usuarioActual,
+    text: texto,
+    time: Date.now(),
+    type: "user"
+  };
+
+  push(ref(db, 'salas/' + salaActivaId + '/chat'), msgObj);
+  input.value = "";
+}
+
+function escucharGlobal(){
+  onValue(ref(db, 'chatGlobal'), (snap) => {
+    let msgs = snap.val() || {};
+    renderChatBox('chatGlobalBox', msgs);
+  });
+}
+
+function enviarMensajeGlobal(){
+  if(usuarioActual == ""){ alert("Primero crea tu cuenta"); goTo(3); return; }
+  let input = document.getElementById('chatGlobalInput');
+  let texto = input.value.trim();
+  if(texto === "") return;
+
+  let msgObj = {
+    sender: usuarioActual,
+    text: texto,
+    time: Date.now(),
+    type: "user"
+  };
+
+  push(ref(db, 'chatGlobal'), msgObj);
+  input.value = "";
+}
+
+function agregarNotif(tipo, titulo, texto){
+  let notifObj = {
+    id: Date.now(),
+    tipo: tipo,
+    titulo: titulo,
+    texto: texto,
+    time: Date.now()
+  };
+
+  notificacionesLocales.unshift(notifObj);
+  if(notificacionesLocales.length > 20) notificacionesLocales.pop();
+  localStorage.setItem('app_notifs', JSON.stringify(notificacionesLocales));
+
+  document.getElementById('notifBadge').classList.remove('hidden');
+  renderNotificaciones();
+}
+
+function renderNotificaciones(){
+  let list = document.getElementById('notifList');
+  list.innerHTML = "";
+
+  if(notificacionesLocales.length === 0){
+    list.innerHTML = `<div style="text-align:center; color:#888; padding:30px;">No tienes notificaciones</div>`;
+    return;
   }
 
-  actualizarTotalUsuarios();
-  const sesion = getSesion(); if(sesion){ entrarApp(sesion); }
-})
+  notificacionesLocales.forEach(n => {
+    let timeStr = new Date(n.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    let iconSvg = '';
+
+    if(n.tipo === 'payment'){
+      iconSvg = `<div class="notif-icon-box payment"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1H6.5c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.88-4.4z"/></svg></div>`;
+    } else if(n.tipo === 'room'){
+      iconSvg = `<div class="notif-icon-box room"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>`;
+    } else {
+      iconSvg = `<div class="notif-icon-box system"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>`;
+    }
+
+    list.innerHTML += `
+      <div class="notif-card">
+        ${iconSvg}
+        <div class="notif-content">
+          <div class="notif-header">
+            <span class="notif-title">${n.titulo}</span>
+            <span class="notif-time">${timeStr}</span>
+          </div>
+          <div class="notif-body">${n.texto}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+window.goTo = goTo;
+window.salirSala = salirSala;
+window.toggleMontos = toggleMontos;
+window.seleccionarMonto = seleccionarMonto;
+window.toggleQR = toggleQR;
+window.validarUsername = validarUsername;
+window.crearSala = crearSala;
+window.filtrarSalas = filtrarSalas;
+window.entrarSala = entrarSala;
+window.pagar = pagar;
+window.enviarMensajeSala = enviarMensajeSala;
+window.enviarMensajeGlobal = enviarMensajeGlobal;
+window.cargarQR = cargarQR;
+
 </script>
 </body>
 </html>
